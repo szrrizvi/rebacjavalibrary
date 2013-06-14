@@ -33,7 +33,7 @@ public class GraphParserTest{
 
 	private Map<String, Node> nodes;
 	private Map<String, Edge> edges;
-	private Map<String, Object> relationIdentifiers;
+	private Map<Object, Object> relationIdentifiers;
 	
 	
 	/**
@@ -153,7 +153,7 @@ public class GraphParserTest{
 	 */
 	@Test
 	public void testGraphOneNodeName() throws Exception{
-		InputStream graphIS = getClass().getResourceAsStream("/circleGraphOneName.graphml");				
+		InputStream graphIS = getClass().getResourceAsStream("/circleGraphOneName.graphml");
 		Graph graph = GraphParser.getGraph(graphIS);
 		
 		Map<String, Node> nodes = graph.getNodes();
@@ -169,7 +169,7 @@ public class GraphParserTest{
 	 */
 	@Test(expected = Exception.class)
 	public void testGraphSameNodeNames() throws Exception{
-		InputStream graphIS = getClass().getResourceAsStream("/circleGraphSameName.graphml");				
-		GraphParser.getGraph(graphIS);		
+		InputStream graphIS = getClass().getResourceAsStream("/circleGraphSameName.graphml");
+		GraphParser.getGraph(graphIS);
 	}
 }

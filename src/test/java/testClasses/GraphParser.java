@@ -1,20 +1,3 @@
-/**
- * Copyright (c) 2013 Syed Zain Rizvi
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
- * Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
- * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 package testClasses;
 
 import java.io.IOException;
@@ -42,7 +25,8 @@ import org.xml.sax.helpers.DefaultHandler;
 public class GraphParser{
 
 	// Private constructor so this class cannot be instantiated from outside
-	private GraphParser(){}
+	private GraphParser(){
+	}
 	
 	/**
 	 * Parses the given input stream and returns the Graph object of that input stream.
@@ -63,7 +47,6 @@ public class GraphParser{
 			// id.
 			for (Node node : nodesMap.values()){
 				if (nodes.containsKey(node.getName())){
-					
 					// If a node name is repeated, then throw exception
 					throw new Exception("Multiple nodes with name: " + node.getName());
 				}
@@ -84,7 +67,7 @@ public class GraphParser{
 		private InputStream graph;		// The GraphML file as input stream
 		private Map<String, Node> nodesMap;	// Collection of nodes
 		private Map<String, Edge> edgesMap;	// Collection of edges
-		private Map<String, Object> relationIdentifiersMap; // Collection of relationIdentifiers
+		private Map<Object, Object> relationIdentifiersMap; // Collection of relationIdentifiers
 							// Identified through the edge label in yEd
 		private Boolean nodeLabelsUsed;	// Flag to indicate if node labels were used
 		
@@ -101,7 +84,7 @@ public class GraphParser{
 			// Instantiate the nodesMap and edgesMap
 			this.nodesMap = new HashMap<String, Node>();
 			this.edgesMap = new HashMap<String, Edge>();
-			this.relationIdentifiersMap = new HashMap<String,Object>();
+			this.relationIdentifiersMap = new HashMap<Object,Object>();
 			
 			// Set nodeLabelsUsed to true. If even one node does not
 			// have a label, this will be set to false.
@@ -118,7 +101,7 @@ public class GraphParser{
 			return this.edgesMap;
 		}
 		
-		public Map<String, Object> getRelationIdentifiersMap(){
+		public Map<Object, Object> getRelationIdentifiersMap(){
 			return this.relationIdentifiersMap;
 		}
 		
@@ -174,7 +157,7 @@ public class GraphParser{
 		}
 		
 		public void endElement(String uri, String localName, String qName) throws SAXException {
-			
+		
 			if(qName.equalsIgnoreCase("Node")) {
 				
 				// Add it to the collection of nodes
