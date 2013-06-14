@@ -9,7 +9,7 @@
 			<relId direction="forward">1</relId>
 			<diamond>
 				<relId direction="forward">1</relId>
-				<requestor/>
+				<variable>req</variable>
 			</diamond>
 		</diamond>
 	</diamond>

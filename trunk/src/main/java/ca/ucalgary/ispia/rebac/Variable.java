@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Syed Zain Rizvi
+ * Copyright (c) 2013 Mona Loorak
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -14,31 +14,9 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 package ca.ucalgary.ispia.rebac;
 
-import ca.ucalgary.ispia.rebac.util.IterablePair;
+public interface Variable extends Policy {
 
-/**
- * @author Syed Zain Rizvi
- */
-
-/**
- * This class is used to combine frames. 
- * NOTE: frameA or frameB could be of type FrameTuple as well.
- */
-
-public class FramePair implements Frame{
-
-	Frame frameA, frameB;
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public Iterable findNeighbours(Object vertex, Object relationIdentifier, Direction direction){
-			
-		Iterable iteA = frameA.findNeighbours(vertex, relationIdentifier, direction);
-		Iterable iteB = frameB.findNeighbours(vertex, relationIdentifier, direction);
-		
-		return new IterablePair(iteA, iteB);
-	}
+	public Object getVariable();
 }

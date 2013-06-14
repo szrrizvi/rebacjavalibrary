@@ -1,5 +1,28 @@
 Change Log
+
 ***************************************************************
+
+v0.0.4
+- The project now supports Hybrid-Modal logic instead of Modal logic.
+
+- The following variants have been added:
+	At
+	Bind
+
+- The following supporting classes have been added:
+	Classes located at ca.ucalgary.ispia.rebac
+		- Environment :- Provides a relationship between Variables and Values
+		- Nomial :- Interface for the Nominal variant
+		- Variable :- Represents a variable
+	Classes located at ca.ucalgary.ispia.rebac
+		- String_Constants :- A container for string constants
+		- RandomEnum :- Randomized enumerator for assigning labels
+		- Triple :- A generic relationship between 3 objects/values
+
+- Supporting tests added as well
+
+***************************************************************
+
 v0.0.3
 - Updated toString methods for "Negation" and "Requestor"
   Negation.toString() now prints parenthesis around the returned string
@@ -15,6 +38,7 @@ v0.0.3
 
 - NOTE: RebacPolicyParser and PolicyUtil work with the concrete
         variant classes in ca.ucalgary.ispia.rebac.impl 
+
 ***************************************************************
 
 v0.0.2

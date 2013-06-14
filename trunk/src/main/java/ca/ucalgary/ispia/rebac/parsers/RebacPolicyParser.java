@@ -37,6 +37,8 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import ca.ucalgary.ispia.rebac.Direction;
+import ca.ucalgary.ispia.rebac.impl.AtImpl;
+import ca.ucalgary.ispia.rebac.impl.BindImpl;
 import ca.ucalgary.ispia.rebac.impl.BoxImpl;
 import ca.ucalgary.ispia.rebac.impl.ConjunctionImpl;
 import ca.ucalgary.ispia.rebac.impl.DiamondImpl;
@@ -45,6 +47,7 @@ import ca.ucalgary.ispia.rebac.impl.FalseImpl;
 import ca.ucalgary.ispia.rebac.impl.NegationImpl;
 import ca.ucalgary.ispia.rebac.impl.RequestorImpl;
 import ca.ucalgary.ispia.rebac.impl.TrueImpl;
+import ca.ucalgary.ispia.rebac.impl.VariableImpl;
 import ca.ucalgary.ispia.rebac.Policy;
 
 
@@ -60,7 +63,7 @@ public class RebacPolicyParser {
 	private InputStream xmlIS;				// XML input stream
 	private List<Policy> policiesObj;		// List contain policies
 	private Policy policyObj;				// Single policy
-	private Map<String, Object> relationIdentifiers;	// Map containing relation identifiers
+	private Map<Object, Object> relationIdentifiers;	// Map containing relation identifiers
 	private Boolean populateRelIds;				// Flag to check if relation identifiers should be populated
 	
 	/**
@@ -68,7 +71,7 @@ public class RebacPolicyParser {
 	 * @param xmlIS The xml input stream
 	 * @param relationIdentifiers The collection of recognizable relation identifiers
 	 */
-	private RebacPolicyParser(InputStream xmlIS, Map<String, Object> relationIdentifiers, Boolean populateRelIds){
+	private RebacPolicyParser(InputStream xmlIS, Map<Object, Object> relationIdentifiers, Boolean populateRelIds){
 		
 		// Initialize the xmlIs, relationIdentifiers, and populateRelIds
 		this.xmlIS = xmlIS;
@@ -97,7 +100,7 @@ public class RebacPolicyParser {
 	 * @return The policy object as described by the input stream
 	 * @throws SAXException when the root element of the input stream is not "policy"
 	 */
-	public static Policy getPolicy(InputStream policyIS, Map<String, Object> relationIdentifiers, Boolean populateRelIds) throws SAXException{
+	public static Policy getPolicy(InputStream policyIS, Map<Object, Object> relationIdentifiers, Boolean populateRelIds) throws SAXException{
 		RebacPolicyParser rpp = new RebacPolicyParser(policyIS, relationIdentifiers, populateRelIds);
 		rpp.parse(true);
 		
@@ -121,7 +124,7 @@ public class RebacPolicyParser {
 	 * @return The list of policy objects as described by the input stream
 	 * @throws SAXException when the root element of the input stream is not "policies"
 	 */
-	public static List<Policy> getPolicies(InputStream policiesIS, Map<String, Object> relationIdentifiers, Boolean populateRelIds) throws SAXException{
+	public static List<Policy> getPolicies(InputStream policiesIS, Map<Object, Object> relationIdentifiers, Boolean populateRelIds) throws SAXException{
 		RebacPolicyParser rpp = new RebacPolicyParser(policiesIS, relationIdentifiers, populateRelIds);
 		rpp.parse(false);
 		
@@ -256,9 +259,42 @@ public class RebacPolicyParser {
 			// element represents the "false" variant
 			newPolicy = FalseImpl.getInstance();
 		}
-		else if (element.getNodeName().equals("requestor")){
-			// element represents the "requestor" variant
-			newPolicy = RequestorImpl.getInstance();
+		else if (element.getNodeName().equals("variable")){	
+			Object temp=null; 
+			temp = new String (element.getFirstChild().getNodeValue());
+			newPolicy = new VariableImpl(temp);
+		}
+		else if (element.getNodeName().equals("at")||element.getNodeName().equals("bind")){
+			Policy policyA = null;
+			Object variable = null;
+			
+			// Get the children nodes of element
+			NodeList nodeList = element.getChildNodes();
+			
+			// Loop through the children nodes of element
+			for (int i=0; i < nodeList.getLength(); i++){
+				Node node = nodeList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE){
+					
+					Element tempElement = (Element) node;
+					if (tempElement.getNodeName().equals("varID")){
+						variable = new String (tempElement.getFirstChild().getNodeValue());
+					}
+					else {
+						// Else the node represents the sub policy
+						// Parse and set the sub policy
+						policyA = parsePolicy(tempElement);
+					}
+				}	
+			}	
+			if (element.getNodeName().equals("at")){
+				// If element represented the at variant, then create new At object
+				newPolicy = new AtImpl(variable, policyA);
+			}
+			else {
+				// Else element represented the bind variant, then create new Bind object
+				newPolicy = new BindImpl(variable, policyA);
+			}
 		}
 		else if (element.getNodeName().equals("and") || element.getNodeName().equals("or")){
 			// element represents the "and" (Conjunction) or "or" (Disjunction) variant

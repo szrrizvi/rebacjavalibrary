@@ -14,31 +14,21 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 package ca.ucalgary.ispia.rebac;
 
-import ca.ucalgary.ispia.rebac.util.IterablePair;
-
 /**
- * @author Syed Zain Rizvi
+ * Binder variant for the abstract class {@link Policy}. 
+ * @author Mona Loorak
  */
-
-/**
- * This class is used to combine frames. 
- * NOTE: frameA or frameB could be of type FrameTuple as well.
- */
-
-public class FramePair implements Frame{
-
-	Frame frameA, frameB;
+public interface Bind extends Policy {
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public Iterable findNeighbours(Object vertex, Object relationIdentifier, Direction direction){
-			
-		Iterable iteA = frameA.findNeighbours(vertex, relationIdentifier, direction);
-		Iterable iteB = frameB.findNeighbours(vertex, relationIdentifier, direction);
-		
-		return new IterablePair(iteA, iteB);
-	}
+	/**
+	 * @return The policy to relate the accessor.
+	 */
+	public Policy getPolicy();
+	
+	/**
+	 * @return The variable that is being binded to a state
+	 */
+	public Object getVariable();
 }

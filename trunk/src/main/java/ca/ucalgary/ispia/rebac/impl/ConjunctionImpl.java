@@ -67,11 +67,9 @@ public final class ConjunctionImpl implements Conjunction {
 	public Policy getPolicyB() {
 		return this.policyB;
 	}
-	
+
 	/**
-	 * Prints out a human readable version of this object.
-	 * @return A human readable version of this object
-	 * @see ca.ucalgary.ispia.rebac.Policy#toString()
+	 * Prints out a readable version of variant.
 	 */
 	@Override
 	public String toString(){
@@ -86,10 +84,8 @@ public final class ConjunctionImpl implements Conjunction {
 		return str;
 	}
 
-	/**
-	 * Returns the hash code of this object
-	 * @return The hash code of this object
-	 * @see ca.ucalgary.ispia.rebac.Policy#hashCode()
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
@@ -101,10 +97,8 @@ public final class ConjunctionImpl implements Conjunction {
 		return result;
 	}
 
-	/**
-	 * Checks if this object is equal to the given object.
-	 * @return True if this object is equal to the given object, else false.
-	 * @see ca.ucalgary.ispia.rebac.Policy#equals(Object)
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
