@@ -28,6 +28,10 @@ import org.xml.sax.SAXException;
 import ca.ucalgary.ispia.rebac.parsers.RebacPolicyParser;
 import ca.ucalgary.ispia.rebac.Policy;
 
+import ca.ucalgary.ispia.rebac.util.Cache;
+import ca.ucalgary.ispia.rebac.util.SimpleCache;
+import ca.ucalgary.ispia.rebac.util.Triple;
+
 import testClasses.Edge;
 import testClasses.Graph;
 import testClasses.GraphParser;
@@ -38,7 +42,7 @@ public class CircleFrameTest {
 
 	Map <String, Node> nodes;
 	Map <String, Edge> edges;
-	Map <String, Object> relationIdentifiers;
+	Map <Object, Object> relationIdentifiers;
 	Policy policy;
 	Frame frame;
 	
@@ -71,17 +75,20 @@ public class CircleFrameTest {
 		Node n0 = nodes.get("0");
 		Node n1 = nodes.get("1");
 		
-		
+		Cache<Triple, Boolean> cache = new SimpleCache<Triple, Boolean>();		
+
 		// Test with n0 as resource
-		assert(!ModelChecker.check(frame, n0, n0, policy));
-		assert(ModelChecker.check(frame, n0, n1, policy));
+		assert(!ModelChecker.check(cache, frame, n0, n0, policy));
+		cache = new SimpleCache<Triple, Boolean>();
+		assert(ModelChecker.check(cache, frame, n0, n1, policy));
 		
 		// Test with n1 as resource
-		assert(ModelChecker.check(frame, n1, n0, policy));
-		assert(!ModelChecker.check(frame, n1, n1, policy));
+		assert(ModelChecker.check(cache, frame, n1, n0, policy));
+		cache = new SimpleCache<Triple, Boolean>();
+		assert(!ModelChecker.check(cache, frame, n1, n1, policy));
 		
 		// Test policy
-		String str = "(<1> (<1> (<1> Requestor)))";
+		String str = "(<1> (<1> (<1> req)))";
 		assert(str.equals(policy.toString()));
 		
 	}
@@ -94,6 +101,6 @@ public class CircleFrameTest {
 		
 		// Using getPolicies() method when the root of the tree is "policy"
 		InputStream xmlIS = getClass().getResourceAsStream("/policyA.xml");
-		RebacPolicyParser.getPolicies(xmlIS, new HashMap<String, Object>(), true);
+		RebacPolicyParser.getPolicies(xmlIS, new HashMap<Object, Object>(), true);
 	}
 }

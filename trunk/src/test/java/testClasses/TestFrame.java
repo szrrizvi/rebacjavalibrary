@@ -1,20 +1,3 @@
-/**
- * Copyright (c) 2013 Syed Zain Rizvi
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
- * Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
- * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 package testClasses;
 
 import java.util.ArrayList;
@@ -53,7 +36,6 @@ public class TestFrame implements Frame {
 	@Override
 	public Iterable findNeighbours(Object vertex,
 			Object relationIdentifier, Direction direction) {
-		
 		Node node = (Node) vertex;		// Cast the vertex to Node object
 		List<Node> neighbours = new ArrayList<Node>();	// Instantiate the list of neighbours
 		
@@ -62,6 +44,8 @@ public class TestFrame implements Frame {
 			if (edge.getRelationIdentifier().equals(relationIdentifier)){
 				// The relation identifier matches
 				if (direction == Direction.FORWARD){
+					if (edge.getSource()==null)
+						System.out.println(edge);
 					if (edge.getSource().equals(node)){
 						// Direction = FORWARD
 						// Given vertex is the source
@@ -69,6 +53,8 @@ public class TestFrame implements Frame {
 					}
 				}
 				else if (direction == Direction.BACKWARD){
+					if (edge.getTarget()==null)
+						System.out.println(edge);
 					if (edge.getTarget().equals(node)){
 						// Direction = BACKWARD
 						// Given vertex is the target
@@ -78,11 +64,17 @@ public class TestFrame implements Frame {
 				else if (direction == Direction.EITHER){
 					// Direction = EITHER
 					// Given vertex is either the source or the target
+					if (edge.getSource()==null)
+						System.out.println(edge);
 					if (edge.getSource().equals(node)){
 						neighbours.add(edge.getTarget());
 					}
-					else if (edge.getTarget().equals(node)){
+					else{
+						if (edge.getTarget()==null)
+						System.out.println(edge);
+						if (edge.getTarget().equals(node)){
 						neighbours.add(edge.getSource());
+					}
 					}
 				}
 			}
