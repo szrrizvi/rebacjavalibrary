@@ -2,7 +2,7 @@ Change Log
 
 ***************************************************************
 
-v0.0.4
+v0.1.2
 - The project now supports Hybrid-Modal logic instead of Modal logic.
 
 - The following variants have been added:
@@ -19,8 +19,10 @@ v0.0.4
 		- RandomEnum :- Randomized enumerator for assigning labels
 		- Triple :- A generic relationship between 3 objects/values
 
-- Supporting tests added as well
-
+- Tests:
+	- The RelationIdentifier map created by GraphParser.java (under testClasses package)
+	  is of type <Object, Object> instead of <String, Object>. Graph.java and the 
+	  test classes have been updated to support that change.
 ***************************************************************
 
 v0.0.3
