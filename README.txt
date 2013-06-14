@@ -1,5 +1,32 @@
 This project is under the MIT License. Please see LICENSE.txt for more information
 
+ReBAC Project version 0.0.4
+***************************************************************
+Updates: 
+
+The project supports Hybrid-Modal logic instead of Modal logic.
+Corresponding changes in ModelChecker.java
+
+-- See ChangeLog.txt for details
+***************************************************************
+
+
+ReBAC Porject version 0.0.3
+***************************************************************
+Updates:
+
+Changed classes representing varaints to interfaces, and moved the
+concrete classes to ca.ucalgary.ispia.rebac.impl
+Corresponding changes in ModelChecker.java and RebacPolicyParser
+
+Created PolicyUtil class to provided utility methods
+
+Minor typo fixes
+
+-- See ChangeLog.txt for details
+***************************************************************
+
+
 ReBAC Project version 0.0.2
 ***************************************************************
 Updates: 
@@ -70,6 +97,7 @@ To clean:
 Contributors
 ***************************************************************
 Syed Zain Rizvi
+Mona Hosseinkhani
 ***************************************************************
 
 yEd

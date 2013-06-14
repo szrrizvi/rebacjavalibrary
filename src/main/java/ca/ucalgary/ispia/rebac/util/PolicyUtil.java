@@ -17,8 +17,13 @@
 
 package ca.ucalgary.ispia.rebac.util;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import ca.ucalgary.ispia.rebac.Direction;
 import ca.ucalgary.ispia.rebac.Policy;
+import ca.ucalgary.ispia.rebac.impl.AtImpl;
+import ca.ucalgary.ispia.rebac.impl.BindImpl;
 import ca.ucalgary.ispia.rebac.impl.BoxImpl;
 import ca.ucalgary.ispia.rebac.impl.ConjunctionImpl;
 import ca.ucalgary.ispia.rebac.impl.DiamondImpl;
@@ -27,6 +32,7 @@ import ca.ucalgary.ispia.rebac.impl.FalseImpl;
 import ca.ucalgary.ispia.rebac.impl.NegationImpl;
 import ca.ucalgary.ispia.rebac.impl.RequestorImpl;
 import ca.ucalgary.ispia.rebac.impl.TrueImpl;
+import ca.ucalgary.ispia.rebac.impl.VariableImpl;
 
 	/**
 	 * @author Syed Zain Rizvi
@@ -41,17 +47,68 @@ import ca.ucalgary.ispia.rebac.impl.TrueImpl;
 		 * Consumes a policy and translates it to a policy only composed of primitive
 		 * operators. NOTE: If the given policy is already only composed of primitive
 		 * operators, it is returned as is.
-		 * Primitive Operators: {@link RequestorImpl}, {@link DiamondImpl}, {@link DisjunctionImpl},
-		 * {@link NegationImpl}, and {@link TrueImpl}
+		 * Primitive Operators: {@link Variable}, {@link Diamond}, {@link Conjunction},
+		 * {@link Negation}, {@link True} , {@link False}, {@link At} and {@link Bind}
 		 * @param tPolicy The policy to be translated.
 		 * @return A policy composed of only primitive operators.
 		 */
 		public static Policy translate(Policy tPolicy){
 			Policy translatedPolicy;
-			
-			if (tPolicy == RequestorImpl.getInstance()){
-				// For requestor variant
+
+			if (tPolicy instanceof VariableImpl){
+				//Already primitive.
 				translatedPolicy = tPolicy;
+			}
+			
+			else if (tPolicy == FalseImpl.getInstance()){
+				// Already primitive
+				translatedPolicy = tPolicy;
+			}
+			else if (tPolicy ==TrueImpl.getInstance()){
+				// Already primitive
+				translatedPolicy = tPolicy;
+			}
+			
+			else if(tPolicy instanceof NegationImpl){
+				// Already primitive. Recurse on contained policy.
+				NegationImpl temp = (NegationImpl) tPolicy;
+				// Get contained fields
+				Policy tempA = temp.getPolicy();
+				// Translate contained policy
+				tempA = translate(tempA);
+				// Create translated policy
+				translatedPolicy = new NegationImpl (tempA);
+			} 
+			
+			else if (tPolicy instanceof ConjunctionImpl){
+				// Already primitive. Recurse on contained policies.
+				
+				ConjunctionImpl temp = (ConjunctionImpl) tPolicy;
+				// Get contained fields
+				Policy tempA = temp.getPolicyA();
+				Policy tempB = temp.getPolicyB();
+				// Translate contained fields
+				tempA = translate(tempA);
+				tempB = translate(tempB);
+				// Create translated policy
+				translatedPolicy = new ConjunctionImpl(tempA, tempB);
+			}
+			
+			else if (tPolicy instanceof DisjunctionImpl){
+				// Disjunction(policyA, policyB) =
+				//	Negation(Conjunction((Negation(policyA)), (Negation(policyB))))
+				
+				DisjunctionImpl temp = (DisjunctionImpl) tPolicy;
+				// Get contained fields
+				Policy tempA = temp.getPolicyA();
+				Policy tempB = temp.getPolicyB();
+				// Translate contained policies
+				tempA = new NegationImpl (translate(tempA));
+				tempB = new NegationImpl (translate(tempB));
+				// Create translated policy
+				Policy tempC = new ConjunctionImpl(tempA, tempB);
+				translatedPolicy = new NegationImpl (tempC);
+				
 			}
 			
 			else if (tPolicy instanceof BoxImpl){
@@ -60,9 +117,9 @@ import ca.ucalgary.ispia.rebac.impl.TrueImpl;
 				BoxImpl temp = (BoxImpl) tPolicy;
 				
 				// Get contained fields
-				Policy tempA = temp.policy;
-				Object relationID = temp.relationIdentifier;
-				Direction direction = temp.direction;
+				Policy tempA = temp.getPolicy();
+				Object relationID = temp.getRelationIdentifier();
+				Direction direction = temp.getDirection();
 				// Translate contained policy
 				tempA = new NegationImpl (translate(tempA));
 				// Create translated policy
@@ -70,72 +127,44 @@ import ca.ucalgary.ispia.rebac.impl.TrueImpl;
 				translatedPolicy = new NegationImpl (tempB);
 			}
 			
-			else if (tPolicy instanceof ConjunctionImpl){
-				// Conjunction(policyA, policyB) =
-				//						Negation(Disjunction((Negation(policyA)), (Negation(policyB))))
-				
-				ConjunctionImpl temp = (ConjunctionImpl) tPolicy;
-				// Get contained fields
-				Policy tempA = temp.policyA;
-				Policy tempB = temp.policyB;
-				// Translate contained policies
-				tempA = new NegationImpl (translate(tempA));
-				tempB = new NegationImpl (translate(tempB));
-				// Create translated policy
-				Policy tempC = new DisjunctionImpl(tempA, tempB);
-				translatedPolicy = new NegationImpl (tempC);
-				
-			}
-					
 			else if (tPolicy instanceof DiamondImpl){
 				// Already primitive. Recurse on contained policy.
 				
 				DiamondImpl temp = (DiamondImpl) tPolicy;
 				// Get contained fields
-				Policy tempA = temp.policy;
-				Object relationID = temp.relationIdentifier;
-				Direction direction = temp.direction;
+				Policy tempA = temp.getPolicy();
+				Object relationID = temp.getRelationIdentifier();
+				Direction direction = temp.getDirection();
 				// Translate contained policy
 				tempA = translate(tempA);
 				// Create translated policy
 				translatedPolicy = new DiamondImpl(tempA, relationID, direction);
 			}
-					
-			else if (tPolicy instanceof DisjunctionImpl){
-				// Already primitive. Recurse on contained policies.
+			
+			else if (tPolicy instanceof BindImpl){
+				//Already primitive. Recurse on contained policy
 				
-				DisjunctionImpl temp = (DisjunctionImpl) tPolicy;
-				// Get contained fields
-				Policy tempA = temp.policyA;
-				Policy tempB = temp.policyB;
-				// Translate contained fields
-				tempA = translate(tempA);
-				tempB = translate(tempB);
+				BindImpl temp= (BindImpl) tPolicy;
+				Policy tempA = temp.getPolicy();
+				Object var = temp.getVariable();
+				
+				//translate contained policy
+				tempA=translate(tempA);
 				// Create translated policy
-				translatedPolicy = new DisjunctionImpl(tempA, tempB);
+				translatedPolicy = new BindImpl(var, tempA);
 			}
 			
-			else if (tPolicy == FalseImpl.getInstance()){
-				// False = Negation(True)
+			else if (tPolicy instanceof AtImpl){
+				//Already primitive. Recurse on contained policy
 				
+				AtImpl temp = (AtImpl) tPolicy;
+				Policy tempA = temp.getPolicy();
+				Object var = temp.getVariable();
+				
+				//translate contained policy
+				tempA=translate(tempA);
 				// Create translated policy
-				translatedPolicy = new NegationImpl(TrueImpl.getInstance());
-			}
-			
-			else if(tPolicy instanceof NegationImpl){
-				// Already primitive. Recurse on contained policy.
-				NegationImpl temp = (NegationImpl) tPolicy;
-				// Get contained fields
-				Policy tempA = temp.policy;
-				// Translate contained policy
-				tempA = translate(tempA);
-				// Create translated policy
-				translatedPolicy = new NegationImpl (tempA);
-			} 
-			
-			else if (tPolicy == TrueImpl.getInstance()){
-				// For true variant
-				translatedPolicy = tPolicy;
+				translatedPolicy = new AtImpl(var, tempA);
 			}
 			
 			else {
@@ -144,5 +173,66 @@ import ca.ucalgary.ispia.rebac.impl.TrueImpl;
 			}
 			
 			return translatedPolicy;
-		}	
+		}
+		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		public static Set findFreeVars(Policy policy, Set free_vars){
+			
+			if (policy instanceof VariableImpl) {
+				VariableImpl temp = (VariableImpl) policy;
+				free_vars.add(temp.getVariable());
+			}
+			else if (policy == FalseImpl.getInstance()){
+				//nothing added
+			}
+			else if (policy ==TrueImpl.getInstance()){
+				//nothing added
+			}
+			
+			else if(policy instanceof NegationImpl){
+				NegationImpl temp = (NegationImpl) policy;
+				findFreeVars(temp.getPolicy(), free_vars);
+			} 
+			
+			else if (policy instanceof ConjunctionImpl){
+				ConjunctionImpl temp = (ConjunctionImpl) policy;
+				
+				Set temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
+				Set temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
+				free_vars.addAll(temp_setA);
+				free_vars.addAll(temp_setB);
+			}
+			
+			else if (policy instanceof DisjunctionImpl){
+				DisjunctionImpl temp = (DisjunctionImpl) policy;
+				
+				Set temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
+				Set temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
+				free_vars.addAll(temp_setA);
+				free_vars.addAll(temp_setB);
+			}
+			
+			else if (policy instanceof BoxImpl){
+				BoxImpl temp = (BoxImpl) policy;
+				findFreeVars(temp.getPolicy(), free_vars);
+			}
+			
+			else if (policy instanceof DiamondImpl){
+				DiamondImpl temp = (DiamondImpl) policy;
+				free_vars = findFreeVars(temp.getPolicy(), free_vars);
+			}
+			
+			else if (policy instanceof BindImpl){
+				BindImpl temp = (BindImpl) policy;
+				findFreeVars(temp.getPolicy(), free_vars);
+				free_vars.remove(temp.getVariable());
+			}
+			
+			else if (policy instanceof AtImpl){
+				AtImpl temp = (AtImpl) policy;
+				findFreeVars(temp.getPolicy(), free_vars);
+				free_vars.add(temp.getVariable());
+			}
+			return free_vars;
+		}
 }

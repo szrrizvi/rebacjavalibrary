@@ -18,23 +18,30 @@
 	</xs:element>
 	
 	<xs:group name="variants">
-		<xs:choice>
-			<xs:element name="requestor" >
-				<xs:complexType/>
-			</xs:element>							
+		<xs:choice>						
 			<xs:element name="true">
 				<xs:complexType/>
 			</xs:element>	
 			<xs:element name="false">
 				<xs:complexType/>
-			</xs:element>	
+			</xs:element>
+			<xs:element name="variable" type="typevar"/>	
 			<xs:element name="and" type="typeandor"/>
 			<xs:element name="or" type="typeandor"/>
 			<xs:element name="not" type="typenot"/>
+			<xs:element name="at" type="typeatbind"/>
+			<xs:element name="bind" type="typeatbind"/>
 			<xs:element name="box" type="typeboxdiamond"/>
 			<xs:element name="diamond" type="typeboxdiamond"/>	
 		</xs:choice>
 	</xs:group>
+	
+	<xs:complexType name="typevar">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
 	
 	<xs:complexType name="typenot">
 		<xs:group ref="variants"/>
@@ -42,6 +49,20 @@
 	
 	<xs:complexType name="typeandor">
 		<xs:group ref="variants" maxOccurs="2" minOccurs="2"/>
+	</xs:complexType>
+	
+	<xs:complexType name="typeatbind">
+		<xs:sequence>
+			<xs:element name="varID">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:group ref="variants"/>
+		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="typeboxdiamond">

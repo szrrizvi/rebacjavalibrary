@@ -37,5 +37,6 @@ public interface Frame {
 	 * @return Specific type neighbours of the given vertex in the effective social
 	 * network.
 	 */
+	@SuppressWarnings("rawtypes")
 	public Iterable findNeighbours(Object vertex, Object relationIdentifier, Direction direction);
 }
