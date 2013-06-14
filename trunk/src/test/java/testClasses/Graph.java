@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Mona Loorak
+ * Copyright (c) 2013 szrrizvi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -17,6 +17,11 @@
 package testClasses;
 
 import java.util.Map;
+
+/**
+ * @author Syed Zain Rizvi
+ * @author Mona Hosseinkhani
+ */
 
 /**
  * Represents a graph that is created using the Node and Edge objects. 

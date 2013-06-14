@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Mona Loorak
+ * Copyright (c) 2013 szrrizvi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -23,9 +23,10 @@ package ca.ucalgary.ispia.rebac.util;
  * A generic relationship between three objects/values.
  * @param <F> Type of first object/value.
  * @param <S> Type of second object/value.
+ * @param <T> Type of third object/value.
  */
 
-// Used for extend
+// Used by the model checker
 
 public class Triple<F, S, T> {
 		
@@ -46,6 +47,7 @@ public class Triple<F, S, T> {
 	 * Initializes the fields.
 	 * @param first The first object/value.
 	 * @param second The second object/value.
+	 * @param third The third object/value
 	 */
 	public Triple(F first, S second, T third){
 		this.first = first;

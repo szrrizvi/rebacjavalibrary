@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Mona Loorak
+ * Copyright (c) 2013 szrrizvi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -18,6 +18,14 @@ package ca.ucalgary.ispia.rebac.impl;
 
 import ca.ucalgary.ispia.rebac.Variable;
 
+/**
+ * @author Mona Hosseinkhani
+ */
+
+/**
+ * A concrete implementation of {@link Virable}.
+ * @see ca.ucalgary.ispia.rebac.Variable
+ */
 public class VariableImpl implements Variable {
 
 	public final Object variable;
