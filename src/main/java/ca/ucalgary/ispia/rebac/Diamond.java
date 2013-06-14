@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Syed Zain Rizvi
+ * Copyright (c) 2013 szrrizvi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -16,6 +16,10 @@
  */
 
 package ca.ucalgary.ispia.rebac;
+
+/**
+ * @author szrrizvi
+ */
 
 /**
  *  Diamond variant for the interface {@link Policy}. Asserts that the owner is related

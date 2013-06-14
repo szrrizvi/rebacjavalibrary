@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Mona Loorak
+ * Copyright (c) 2013 szrrizvi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -25,6 +25,7 @@ import ca.ucalgary.ispia.rebac.Frame;
 
 /**
  * @author Syed Zain Rizvi
+ * @author Mona Hosseinkhani
  */
 /**
  * Basic implementation of the Frame interface.

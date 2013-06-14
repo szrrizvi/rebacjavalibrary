@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Syed Zain Rizvi
+ * Copyright (c) 2013 szrrizvi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -17,8 +17,9 @@
 package ca.ucalgary.ispia.rebac;
 
 /**
- * Binder variant for the abstract class {@link Policy}. 
- * @author Mona Loorak
+ * Binder variant for the interface {@link Policy}. Updates the {@link Environment} to assign a {@link @Variable} to
+ * the current state.
+ * @author Mona Hosseinkhani
  */
 public interface Bind extends Policy {
 	
