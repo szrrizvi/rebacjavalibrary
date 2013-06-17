@@ -16,6 +16,9 @@
 		<file>
 			<source>pom.xml</source>
 		</file>
+		<file>
+			<source>LICENSE.txt</source>
+		</file>
 	</files>
 	<fileSets>
 		<fileSet>
