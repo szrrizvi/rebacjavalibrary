@@ -1,6 +1,6 @@
 This project is under the MIT License. Please see LICENSE.txt for more information
 
-ReBAC Project version 0.0.4
+ReBAC Project version 0.1.2
 ***************************************************************
 Updates: 
 
