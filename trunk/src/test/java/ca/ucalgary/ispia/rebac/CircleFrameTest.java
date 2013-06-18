@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 szrrizvi
+ * Copyright (c) 2013 ReBAC Java Library
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Assert;
 import org.xml.sax.SAXException;
 
 import ca.ucalgary.ispia.rebac.parsers.RebacPolicyParser;
@@ -78,18 +79,18 @@ public class CircleFrameTest {
 		Cache<Triple, Boolean> cache = new SimpleCache<Triple, Boolean>();		
 
 		// Test with n0 as resource
-		assert(!ModelChecker.check(cache, frame, n0, n0, policy));
+		Assert.assertTrue(!ModelChecker.check(cache, frame, n0, n0, policy));
 		cache = new SimpleCache<Triple, Boolean>();
-		assert(ModelChecker.check(cache, frame, n0, n1, policy));
+		Assert.assertTrue(ModelChecker.check(cache, frame, n0, n1, policy));
 		
 		// Test with n1 as resource
-		assert(ModelChecker.check(cache, frame, n1, n0, policy));
+		Assert.assertTrue(ModelChecker.check(cache, frame, n1, n0, policy));
 		cache = new SimpleCache<Triple, Boolean>();
-		assert(!ModelChecker.check(cache, frame, n1, n1, policy));
+		Assert.assertTrue(!ModelChecker.check(cache, frame, n1, n1, policy));
 		
 		// Test policy
 		String str = "(<1> (<1> (<1> req)))";
-		assert(str.equals(policy.toString()));
+		Assert.assertTrue(str.equals(policy.toString()));
 		
 	}
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 szrrizvi
+ * Copyright (c) 2013 ReBAC Java Library
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Assert;
 
 import testClasses.Edge;
 import testClasses.Graph;
@@ -60,9 +61,9 @@ public class GraphParserTest{
 	public void testNodeN0(){
 		Node node = nodes.get("0");
 		
-		assert(node != null);
-		assert(node.getId().equals("n0"));
-		assert(node.getName().equals("0"));
+		Assert.assertTrue(node != null);
+		Assert.assertTrue(node.getId().equals("n0"));
+		Assert.assertTrue(node.getName().equals("0"));
 	}
 
 	/**
@@ -72,9 +73,9 @@ public class GraphParserTest{
 	public void testNodeN1(){
 		Node node = nodes.get("1");
 		
-		assert(node != null);
-		assert(node.getId().equals("n1"));
-		assert(node.getName().equals("1"));
+		Assert.assertTrue(node != null);
+		Assert.assertTrue(node.getId().equals("n1"));
+		Assert.assertTrue(node.getName().equals("1"));
 	}
 	/**
 	 * Test for extra nodes
@@ -85,7 +86,7 @@ public class GraphParserTest{
 		nodes.remove("0");
 		nodes.remove("1");
 		
-		assert(nodes.isEmpty());
+		Assert.assertTrue(nodes.isEmpty());
 	}
 	
 	/**
@@ -98,10 +99,10 @@ public class GraphParserTest{
 		Node target = nodes.get("1");
 		Object relationIdentifier = relationIdentifiers.get("1");
 		
-		assert(edge.getId().equals("e0"));
-		assert(edge.getSource().equals(source));
-		assert(edge.getTarget().equals(target));
-		assert(edge.getRelationIdentifier().equals(relationIdentifier));
+		Assert.assertTrue(edge.getId().equals("e0"));
+		Assert.assertTrue(edge.getSource().equals(source));
+		Assert.assertTrue(edge.getTarget().equals(target));
+		Assert.assertTrue(edge.getRelationIdentifier().equals(relationIdentifier));
 	}
 
 	/**
@@ -114,10 +115,10 @@ public class GraphParserTest{
 		Node target = nodes.get("0");
 		Object relationIdentifier = relationIdentifiers.get("1");
 		
-		assert(edge.getId().equals("e1"));
-		assert(edge.getSource().equals(source));
-		assert(edge.getTarget().equals(target));
-		assert(edge.getRelationIdentifier().equals(relationIdentifier));
+		Assert.assertTrue(edge.getId().equals("e1"));
+		Assert.assertTrue(edge.getSource().equals(source));
+		Assert.assertTrue(edge.getTarget().equals(target));
+		Assert.assertTrue(edge.getRelationIdentifier().equals(relationIdentifier));
 	}
 	
 	/**
@@ -129,7 +130,7 @@ public class GraphParserTest{
 		edges.remove("e0");
 		edges.remove("e1");
 
-		assert(edges.isEmpty());
+		Assert.assertTrue(edges.isEmpty());
 	}
 	
 	/**
@@ -145,7 +146,7 @@ public class GraphParserTest{
 		nodes.remove("n0");
 		nodes.remove("n1");
 		
-		assert(nodes.isEmpty());
+		Assert.assertTrue(nodes.isEmpty());
 	}
 	
 	/**
@@ -161,7 +162,7 @@ public class GraphParserTest{
 		nodes.remove("n0");
 		nodes.remove("n1");
 		
-		assert(nodes.isEmpty());
+		Assert.assertTrue(nodes.isEmpty());
 	}
 	
 	/**
