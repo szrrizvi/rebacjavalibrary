@@ -118,6 +118,13 @@ with any other version of yEd.
 
 The GraphParser is not guaranteed to work if the GraphML file is edited manually.
 
+Support for yEd 3.10.2:
+	The GraphML files created through yEd 3.10.2, contain the "y:PreferredPlacementDescriptor" tag
+	within the "y:EdgeLabel" tag. In order to make the GraphParser work with GraphML files (created
+	throught yEd 3.10.2) you must remove the "y:PreferredPlacementDescriptor" tag and all of its 
+	contents. And make sure there are no empty spaces in the "y:EdgeLabel" body.
+		EX: <y:EdgeLabel ...>Label</y:EdgeLabel>
+
 When would you need yEd?
 	The only reason you would need to use yEd is if you are adding or manipulating test cases.
 	If you are simply using this as a library or only adding features to this project (without 
