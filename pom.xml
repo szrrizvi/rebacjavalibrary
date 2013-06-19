@@ -7,7 +7,7 @@
   <version>0.1.2</version>
   <packaging>jar</packaging>
 
-  <name>ReBAC</name>
+  <name>ReBAC Java Library</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
