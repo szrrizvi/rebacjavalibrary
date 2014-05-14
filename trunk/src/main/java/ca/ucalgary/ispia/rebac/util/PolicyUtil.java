@@ -41,6 +41,20 @@ import ca.ucalgary.ispia.rebac.impl.RequestorImpl;
 import ca.ucalgary.ispia.rebac.impl.TrueImpl;
 import ca.ucalgary.ispia.rebac.impl.VariableImpl;
 import ca.ucalgary.ispia.rebac.impl.OwnerImpl;
+import ca.ucalgary.ispia.rebac.At;
+import ca.ucalgary.ispia.rebac.Bind;
+import ca.ucalgary.ispia.rebac.Box;
+import ca.ucalgary.ispia.rebac.Conjunction;
+import ca.ucalgary.ispia.rebac.Diamond;
+import ca.ucalgary.ispia.rebac.Disjunction;
+import ca.ucalgary.ispia.rebac.False;
+import ca.ucalgary.ispia.rebac.Negation;
+import ca.ucalgary.ispia.rebac.Requestor;
+import ca.ucalgary.ispia.rebac.True;
+import ca.ucalgary.ispia.rebac.Variable;
+import ca.ucalgary.ispia.rebac.Owner;
+
+
 
 import ca.ucalgary.ispia.rebac.util.Constants;
 
@@ -344,21 +358,21 @@ public class PolicyUtil {
 
 		
 
-		if (policy instanceof VariableImpl) {
+		if (policy instanceof Variable) {
 
-			VariableImpl temp = (VariableImpl) policy;
+			Variable temp = (Variable) policy;
 
 			free_vars.add(temp.getVariable());
 
 		}
 
-		else if (policy == FalseImpl.getInstance()){
+		else if (policy instanceof False){
 
 			//nothing added
 
 		}
 
-		else if (policy ==TrueImpl.getInstance()){
+		else if (policy instanceof True){
 
 			//nothing added
 
@@ -366,9 +380,9 @@ public class PolicyUtil {
 
 		
 
-		else if(policy instanceof NegationImpl){
+		else if(policy instanceof Negation){
 
-			NegationImpl temp = (NegationImpl) policy;
+			Negation temp = (Negation) policy;
 
 			findFreeVars(temp.getPolicy(), free_vars);
 
@@ -376,27 +390,9 @@ public class PolicyUtil {
 
 		
 
-		else if (policy instanceof ConjunctionImpl){
+		else if (policy instanceof Conjunction){
 
-			ConjunctionImpl temp = (ConjunctionImpl) policy;
-
-			
-
-			Set temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
-
-			Set temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
-
-			free_vars.addAll(temp_setA);
-
-			free_vars.addAll(temp_setB);
-
-		}
-
-		
-
-		else if (policy instanceof DisjunctionImpl){
-
-			DisjunctionImpl temp = (DisjunctionImpl) policy;
+			Conjunction temp = (Conjunction) policy;
 
 			
 
@@ -412,9 +408,27 @@ public class PolicyUtil {
 
 		
 
-		else if (policy instanceof BoxImpl){
+		else if (policy instanceof Disjunction){
 
-			BoxImpl temp = (BoxImpl) policy;
+			Disjunction temp = (Disjunction) policy;
+
+			
+
+			Set temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
+
+			Set temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
+
+			free_vars.addAll(temp_setA);
+
+			free_vars.addAll(temp_setB);
+
+		}
+
+		
+
+		else if (policy instanceof Box){
+
+			Box temp = (Box) policy;
 
 			findFreeVars(temp.getPolicy(), free_vars);
 
@@ -422,9 +436,9 @@ public class PolicyUtil {
 
 		
 
-		else if (policy instanceof DiamondImpl){
+		else if (policy instanceof Diamond){
 
-			DiamondImpl temp = (DiamondImpl) policy;
+			Diamond temp = (Diamond) policy;
 
 			free_vars = findFreeVars(temp.getPolicy(), free_vars);
 
@@ -432,9 +446,9 @@ public class PolicyUtil {
 
 		
 
-		else if (policy instanceof BindImpl){
+		else if (policy instanceof Bind){
 
-			BindImpl temp = (BindImpl) policy;
+			Bind temp = (Bind) policy;
 
 			findFreeVars(temp.getPolicy(), free_vars);
 
@@ -444,9 +458,9 @@ public class PolicyUtil {
 
 		
 
-		else if (policy instanceof AtImpl){
+		else if (policy instanceof At){
 
-			AtImpl temp = (AtImpl) policy;
+			At temp = (At) policy;
 
 			findFreeVars(temp.getPolicy(), free_vars);
 
