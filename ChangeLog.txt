@@ -2,6 +2,12 @@ Change Log
 
 ***************************************************************
 
+v0.1.5
+- Updated findFreeVars method in policyUtil. The method no longer uses the concrete
+  implementations, but rather the interfaces.
+
+***************************************************************
+
 v0.1.4
 
 - The Requestor variant now extends the Variable interface. This is done to maintain 
