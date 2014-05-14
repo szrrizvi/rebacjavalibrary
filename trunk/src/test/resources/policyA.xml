@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:policy	xmlns:p="http://www.example.org/rebac" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:schemaLocation="http://www.example.org/rebac rebacPolicy.xsd ">
+			
+	<diamond>
+		<relId direction="forward">1</relId>
+		<diamond>
+			<relId direction="forward">1</relId>
+			<diamond>
+				<relId direction="forward">1</relId>
+				<variable>req</variable>
+			</diamond>
+		</diamond>
+	</diamond>
+			
+</p:policy>

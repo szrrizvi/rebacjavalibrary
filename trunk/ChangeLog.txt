@@ -1,0 +1,131 @@
+Change Log
+
+***************************************************************
+
+v0.1.5
+- Updated findFreeVars method in policyUtil. The method no longer uses the concrete
+  implementations, but rather the interfaces.
+
+***************************************************************
+
+v0.1.4
+
+- The Requestor variant now extends the Variable interface. This is done to maintain 
+  backwards compatibility, and still support Hybrid-Modal logic. 
+
+- Similar to the Requestor variant, Owner has also been added as a variant that extends
+  the Variable interface.
+  
+
+***************************************************************
+
+v0.1.3
+
+- Maven release of v0.1.2
+
+
+***************************************************************
+
+
+v0.1.2
+
+
+- The project now supports Hybrid-Modal logic instead of Modal logic.
+
+
+- The following variants have been added:
+
+	At
+	
+Bind
+
+
+	
+- The following supporting classes have been added:
+	Classes located at ca.ucalgary.ispia.rebac
+
+		- Environment :- Provides a relationship between Variables and Values
+		
+- Nomial :- Interface for the Nominal variant
+
+		- Variable :- Represents a variable
+	Classes located at ca.ucalgary.ispia.rebac
+	
+		- String_Constants :- A container for string constants
+
+		- RandomEnum :- Randomized enumerator for assigning labels
+
+		- Triple :- A generic relationship between 3 objects/values
+
+
+
+- Tests:
+
+	- The RelationIdentifier map created by GraphParser.java (under testClasses package)
+
+	is of type <Object, Object> instead of <String, Object>. Graph.java and the
+	test classes have been updated to support that change.
+	
+
+***************************************************************
+
+
+v0.0.3
+
+- Updated toString methods for "Negation" and "Requestor"
+  Negation.toString() now prints parenthesis around the returned string
+  Requestor.toString() now returns "Requestor" (R is upper case)
+  
+- Updated CircleFrameTest.test() due to change in Requestor.toString().
+
+- Changed classes representing varaints to interfaces, and moved the
+  concrete classes to ca.ucalgary.ispia.rebac.impl
+  Corresponding changes in ModelChecker.java and RebacPolicyParser
+  
+- Created class PolicyUtil that provices the translator method
+
+- NOTE: RebacPolicyParser and PolicyUtil work with the concrete
+        variant classes in ca.ucalgary.ispia.rebac.impl 
+        
+
+***************************************************************
+
+
+v0.0.2
+	
+- Added test suite:
+	- Added "resources" folder in src/test for resources to be used by JUnit testing.
+	
+	- In test section added "testClasses" package to hold basic testing classes.
+	
+	- Content of testClasses package:-
+		- Edge :- Object to represent an edge in a graph.
+		- Graph :- Object to represent a graph.
+		- GraphPraser :- A SAX GraphML parser.
+				NOTE: The GraphML parser depends on the GraphML file to be created through yEd.
+		 			  This will need to be changed to work with generic GraphML files
+		- Node :- Object to represent an node in a graph.
+		- TestFrame :- A concrete frame implementation for testing.
+		
+	- Actual JUnit test cases in ca.ucalgary.ispia.rebac 
+	
+- Added ReBAC policy schema (rebacPolicy.xsd) in src/main/resources and in src/test/resources.
+
+- Added ReBAC policy xml parser (rebacPolicyParser) in ca.ucalgary.ispia.rebac.parsers.
+
+- Updated from JUnit 3.8.1 to 4.8.2
+
+- Updated the assembly descriptor to include the ChangeLog.txt file.
+
+- Added simple tests to test GraphML parser as well as ReBAC Policy parser.
+
+- RelationshipIdentifier now known as RelationIdentifier
+
+- RelationshipIdentifier interface removed, now Relation Identifiers are described by generic Object class.
+
+***************************************************************
+
+v0.0.1
+- Initial release
+
+***************************************************************
