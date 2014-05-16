@@ -28,11 +28,10 @@ import org.xml.sax.SAXException;
 
 import ca.ucalgary.ispia.rebac.parsers.RebacPolicyParser;
 import ca.ucalgary.ispia.rebac.Policy;
-
 import ca.ucalgary.ispia.rebac.util.Cache;
+import ca.ucalgary.ispia.rebac.util.Constants;
 import ca.ucalgary.ispia.rebac.util.SimpleCache;
 import ca.ucalgary.ispia.rebac.util.Triple;
-
 import testClasses.Edge;
 import testClasses.Graph;
 import testClasses.GraphParser;
@@ -76,17 +75,19 @@ public class CircleFrameTest {
 		Node n0 = nodes.get("0");
 		Node n1 = nodes.get("1");
 		
-		Cache<Triple, Boolean> cache = new SimpleCache<Triple, Boolean>();		
-
+		Cache<Triple<Policy, Environment, Object>, Boolean> cache = new SimpleCache<Triple<Policy, Environment, Object>, Boolean>();		
+		Constants.VariableConvention vc = Constants.VariableConvention.ResourceRequestor; 
+		
+		
 		// Test with n0 as resource
-		Assert.assertTrue(!ModelChecker.check(cache, frame, n0, n0, policy));
-		cache = new SimpleCache<Triple, Boolean>();
-		Assert.assertTrue(ModelChecker.check(cache, frame, n0, n1, policy));
+		Assert.assertTrue(!ModelChecker.check(cache, frame, vc, n0, n0, policy));
+		cache = new SimpleCache<Triple<Policy, Environment, Object>, Boolean>();
+		Assert.assertTrue(ModelChecker.check(cache, frame, vc, n0, n1, policy));
 		
 		// Test with n1 as resource
-		Assert.assertTrue(ModelChecker.check(cache, frame, n1, n0, policy));
-		cache = new SimpleCache<Triple, Boolean>();
-		Assert.assertTrue(!ModelChecker.check(cache, frame, n1, n1, policy));
+		Assert.assertTrue(ModelChecker.check(cache, frame, vc, n1, n0, policy));
+		cache = new SimpleCache<Triple<Policy, Environment, Object>, Boolean>();
+		Assert.assertTrue(!ModelChecker.check(cache, frame, vc, n1, n1, policy));
 		
 		// Test policy
 		String str = "(<1> (<1> (<1> req)))";

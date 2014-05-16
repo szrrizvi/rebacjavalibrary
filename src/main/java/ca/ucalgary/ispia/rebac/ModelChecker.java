@@ -38,26 +38,83 @@ public class ModelChecker {
 	/**
 	 * Finds if the given access is allowed. Assumes that the given policy is in
 	 * simplest form.
-	 * @param frame The protected state
-	 * @param resource The resource 
-	 * @param requestor The resource requestor
+	 * @param cache
+	 * @param frame The protection state
+	 * @param vc The variable convention
+	 * @param u The starting point
+	 * @param v The end point
+	 * @param policy The policy to be checking
+	 * @return True if the access is allowed by the policy, else false
+	 */
+	public static boolean check(Cache<Triple<Policy, Environment, Object>, Boolean> cache,
+			Frame frame, Constants.VariableConvention vc, Object u, Object v, Policy policy) {
+		
+		Environment g = null;
+		
+		// Provide variable names based on the variable convention
+		switch(vc){
+		case OwnerRequestor:
+			g = Environment.insert(Constants.owner, u, g);
+			g = Environment.insert(Constants.requestor, v, g);
+			break;
+		case ResourceRequestor:
+			g = Environment.insert(Constants.resource, u, g);
+			g = Environment.insert(Constants.requestor, v, g);
+			break;
+		default:
+			break;
+		}
+		
+		// Check if the policy can be satisfied
+		boolean result = check(cache, frame, g, u, policy);
+		return result;
+		
+	}
+	
+	/**
+	 * Finds if the given access is allowed. Assumes that the given policy is in
+	 * simplest form.
+	 * @param cache
+	 * @param frame The protection state
+	 * @param uName The variable name for u
+	 * @param u The starting point
+	 * @param vName The variable name for v
+	 * @param v The end point 
 	 * @param policy The policy to be checking
 	 * @return True if the access is allowed by the policy, else false.
 	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean check(Cache cache, Frame frame, Object owner, Object requestor, Policy policy) {
-		// Initialize cache
-		//Cache<Triple, Boolean> cache = new Cache<Triple, Boolean>();
-		Environment g = null;
+	public static boolean check(Cache<Triple<Policy, Environment, Object>, Boolean> cache, 
+			Frame frame, Object uName, Object u, Object vName, Object v, Policy policy){
 		
-		g = Environment.insert(Constants.owner, owner, g);
-		g = Environment.insert(Constants.requestor, requestor, g);
+		// Construct the environment
+		Environment g = null;
+		g = Environment.insert(uName, u, g);
+		g = Environment.insert(vName, v, g);
+		
+		// Check if the policy can be satisfied
+		boolean result = check(cache, frame, g, u, policy);
+		return result;
+				
+	}
+	
+	
+	/**
+	 * Finds if the given access is allowed. Assumes that the given policy is in
+	 * simplest form.
+	 * @param cache
+	 * @param frame The protection state
+	 * @param g The pre-constructed environment. The valuation
+	 * @param u The starting point
+	 * @param policy The policy to be checking
+	 * @return True if the access is allowed by the policy, else false.
+	 */
+	public static boolean check(Cache<Triple<Policy, Environment, Object>, Boolean> cache, 
+			Frame frame, Environment g, Object u, Policy policy){
 		
 		// Call checker
-		boolean result = checker(cache, frame, owner, g, policy);
-		//System.out.println("cache size:	" + cache.get_size());
+		boolean result = checker(cache, frame, u, g, policy);
 		return result;
-		
+				
 	}
 	
 	/**
