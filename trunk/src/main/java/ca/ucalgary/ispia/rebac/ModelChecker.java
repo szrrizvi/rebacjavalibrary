@@ -22,7 +22,6 @@ import java.util.Set;
 import ca.ucalgary.ispia.rebac.util.Constants;
 import ca.ucalgary.ispia.rebac.util.Triple;
 import ca.ucalgary.ispia.rebac.util.Cache;
-import ca.ucalgary.ispia.rebac.util.SimpleCache;
 import ca.ucalgary.ispia.rebac.util.PolicyUtil;
 
 /**

@@ -33,16 +33,14 @@ import ca.ucalgary.ispia.rebac.Frame;
  */
 public class TestFrame implements Frame {
 
-	private Map<String, Node> nodes;	// List of nodes (verticies)
 	private Map<String, Edge> edges;	// List of edges (relationships)
 	
 	/**
-	 * Constructor. Sets the list of nodes and edges
+	 * Constructor. Sets the list of edges
 	 * @param nodes
 	 * @param edges
 	 */
-	public TestFrame(Map<String, Node> nodes, Map<String, Edge> edges){
-		this.nodes = nodes;
+	public TestFrame(Map<String, Edge> edges){
 		this.edges = edges;
 	}
 	
@@ -51,7 +49,7 @@ public class TestFrame implements Frame {
 	 * in the given direction
 	 */
 	@Override
-	public Iterable findNeighbours(Object vertex,
+	public Iterable<Node> findNeighbours(Object vertex,
 			Object relationIdentifier, Direction direction) {
 		Node node = (Node) vertex;		// Cast the vertex to Node object
 		List<Node> neighbours = new ArrayList<Node>();	// Instantiate the list of neighbours
