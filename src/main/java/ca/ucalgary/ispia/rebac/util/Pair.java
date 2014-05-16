@@ -78,7 +78,7 @@ public class Pair<F, S> {
 		if (!(obj instanceof Pair)) {
 			return false;		// False if obj is not of same instance
 		}
-		Pair other = (Pair) obj;
+		Pair<?,?> other = (Pair<?,?>) obj;
 		if (first == null) {
 			if (other.first != null) {
 				return false;	// False if first is null and obj's first is not null

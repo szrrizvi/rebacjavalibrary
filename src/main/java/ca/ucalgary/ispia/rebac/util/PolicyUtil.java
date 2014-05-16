@@ -377,7 +377,14 @@ public class PolicyUtil {
 			//nothing added
 
 		}
+		
+		else if (policy instanceof Requestor){
+			//noting added
+		}
 
+		else if (policy instanceof Owner){
+			//nothing added
+		}
 		
 
 		else if(policy instanceof Negation){

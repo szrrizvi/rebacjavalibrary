@@ -16,7 +16,6 @@
  */
 package ca.ucalgary.ispia.rebac;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -159,7 +158,7 @@ public class Environment {
 	 * @param variables
 	 * @return arrayList of all the variables in env
 	 */
-	public static List get_variables (Environment env, List variables) {
+	public static List<Object> get_variables (Environment env, List<Object> variables) {
 		if (env == null) {
 			return variables;
 		}
@@ -177,7 +176,7 @@ public class Environment {
 	 * @param vars : vars that should not be projected from the env.
 	 * @return : An env containing just the variables encluded in vars.
 	 */
-	public static Environment project(Environment env, Set vars) {
+	public static Environment project(Environment env, Set<Object> vars) {
 		//assert (env.get_variables(env, new ArrayList<Object>()).containsAll(vars));
 		if (env == null)
 			return null;

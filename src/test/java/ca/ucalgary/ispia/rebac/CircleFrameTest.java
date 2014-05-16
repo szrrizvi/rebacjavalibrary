@@ -54,8 +54,8 @@ public class CircleFrameTest {
 		Graph graph = GraphParser.getGraph(graphIS);
 		
 		// Get the collection of nodes, edges, and relation identifiers
-		nodes = graph.getNodes();
 		edges = graph.getEdges();
+		nodes = graph.getNodes();
 		relationIdentifiers = graph.getRelationIdentifiers();
 		
 		InputStream xmlIS = getClass().getResourceAsStream("/policyA.xml");
@@ -66,7 +66,7 @@ public class CircleFrameTest {
 			e.printStackTrace();
 		}
 		
-		frame = new TestFrame(nodes, edges);
+		frame = new TestFrame(edges);
 	}
 	
 	@Test

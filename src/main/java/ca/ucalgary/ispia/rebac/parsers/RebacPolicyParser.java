@@ -45,6 +45,7 @@ import ca.ucalgary.ispia.rebac.impl.DiamondImpl;
 import ca.ucalgary.ispia.rebac.impl.DisjunctionImpl;
 import ca.ucalgary.ispia.rebac.impl.FalseImpl;
 import ca.ucalgary.ispia.rebac.impl.NegationImpl;
+import ca.ucalgary.ispia.rebac.impl.OwnerImpl;
 import ca.ucalgary.ispia.rebac.impl.RequestorImpl;
 import ca.ucalgary.ispia.rebac.impl.TrueImpl;
 import ca.ucalgary.ispia.rebac.impl.VariableImpl;
@@ -258,6 +259,14 @@ public class RebacPolicyParser {
 		else if (element.getNodeName().equals("false")){
 			// element represents the "false" variant
 			newPolicy = FalseImpl.getInstance();
+		}
+		else if (element.getNodeName().equals("requestor")){
+			// element represents the "requestor" variant
+			newPolicy = RequestorImpl.getInstance();
+		}
+		else if (element.getNodeName().equals("owner")){
+			// element represents the "owner" variant
+			newPolicy = OwnerImpl.getInstance();
 		}
 		else if (element.getNodeName().equals("variable")){	
 			Object temp=null; 

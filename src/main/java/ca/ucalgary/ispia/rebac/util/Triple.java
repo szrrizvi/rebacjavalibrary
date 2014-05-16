@@ -83,7 +83,7 @@ public class Triple<F, S, T> {
 		if (!(obj instanceof Triple)) {
 			return false;		// False if obj is not of same instance
 		}
-		Triple other = (Triple) obj;
+		Triple<?,?,?> other = (Triple<?,?,?>) obj;
 		if (first == null) {
 			if (other.first != null) {
 				return false;	// False if first is null and obj's first is not null

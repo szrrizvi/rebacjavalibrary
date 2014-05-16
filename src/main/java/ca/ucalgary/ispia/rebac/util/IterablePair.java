@@ -54,16 +54,16 @@ public class IterablePair<E> implements Iterable<E> {
 	 *
 	 * @param <E>
 	 */
-	private class IteratorPair<E> implements Iterator<E> {
+	private class IteratorPair<T> implements Iterator<T> {
 		
-		Iterator<E> itrA, itrB;
+		Iterator<T> itrA, itrB;
 		
 		/**
 		 * Contructor; Assign the iterators
 		 * @param itrA
 		 * @param itrB
 		 */
-		public IteratorPair(Iterator<E> itrA, Iterator<E> itrB) {
+		public IteratorPair(Iterator<T> itrA, Iterator<T> itrB) {
 			this.itrA = itrA;
 			this.itrB = itrB;
 		}
@@ -78,7 +78,7 @@ public class IterablePair<E> implements Iterable<E> {
 		/**
 		 * Returns the next element in the iterator
 		 */
-		public E next() {
+		public T next() {
 			if (itrA.hasNext()) {
 				return itrA.next();
 			} else {
