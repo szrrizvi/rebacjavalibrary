@@ -31,11 +31,20 @@ public class Constants {
 		// Variable names
 		public static final String owner="own"; 
 		public static final String requestor="req";
+		public static final String resource="res";
+
 		public static final String var_name_start = "x";
+		
+		//enum for Variable name convention
+		public enum VariableConvention{
+			OwnerRequestor,
+			ResourceRequestor
+		}
+		
 		
 		// Cache size
 		public static final int cache_size = 8000000;
 		//alpha must be greater than zero and less than or equal one.
-		public static final float alpha = .5f; 
+		public static final float alpha = .5f;
 
 }
