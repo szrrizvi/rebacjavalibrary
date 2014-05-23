@@ -25,9 +25,7 @@ package ca.ucalgary.ispia.rebac.util;
 import java.util.HashSet;
 import java.util.Set;
 
-
 import ca.ucalgary.ispia.rebac.Direction;
-
 import ca.ucalgary.ispia.rebac.Policy;
 import ca.ucalgary.ispia.rebac.impl.AtImpl;
 import ca.ucalgary.ispia.rebac.impl.BindImpl;
@@ -38,6 +36,7 @@ import ca.ucalgary.ispia.rebac.impl.DisjunctionImpl;
 import ca.ucalgary.ispia.rebac.impl.FalseImpl;
 import ca.ucalgary.ispia.rebac.impl.NegationImpl;
 import ca.ucalgary.ispia.rebac.impl.RequestorImpl;
+import ca.ucalgary.ispia.rebac.impl.ResourceImpl;
 import ca.ucalgary.ispia.rebac.impl.TrueImpl;
 import ca.ucalgary.ispia.rebac.impl.VariableImpl;
 import ca.ucalgary.ispia.rebac.impl.OwnerImpl;
@@ -120,6 +119,10 @@ public class PolicyUtil {
 		
 			//Translate the Requestor variant to a variable
 			translatedPolicy = new VariableImpl(Constants.requestor);
+		}
+		else if (tPolicy instanceof ResourceImpl){
+			//Translate the Resource variant to ta variable
+			translatedPolicy = new VariableImpl(Constants.resource);
 		}
 
 		else if (tPolicy == FalseImpl.getInstance()){
