@@ -3,7 +3,7 @@
 
   <groupId>ca.ucalgary.ispia</groupId>
   <artifactId>rebac</artifactId>
-  <version>0.1.8-SNAPSHOT</version>
+  <version>0.1.8</version>
   <packaging>jar</packaging>
 
   <name>ReBAC Java Library</name>
@@ -18,9 +18,9 @@
     </license>
   </licenses>
   <scm>
-    <url>http://svn.code.sf.net/p/rebac/code/tags/rebac-0.1.7</url>
-    <connection>scm:svn:http://svn.code.sf.net/p/rebac/code/tags/rebac-0.1.7</connection>
-    <developerConnection>scm:svn:https://svn.code.sf.net/p/rebac/code/tags/rebac-0.1.7</developerConnection>
+    <url>http://svn.code.sf.net/p/rebac/code/tags/rebac-0.1.8</url>
+    <connection>scm:svn:http://svn.code.sf.net/p/rebac/code/tags/rebac-0.1.8</connection>
+    <developerConnection>scm:svn:https://svn.code.sf.net/p/rebac/code/tags/rebac-0.1.8</developerConnection>
   </scm>
   <developers>
     <developer>
