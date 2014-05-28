@@ -111,6 +111,7 @@ public class ModelChecker {
 			Frame frame, Environment g, Object u, Policy policy){
 		
 		// Call checker
+		
 		boolean result = checker(cache, frame, u, g, policy);
 		return result;
 				
@@ -127,7 +128,6 @@ public class ModelChecker {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static boolean checker(Cache cache, Frame frame, Object s, Environment g, Policy policy) {
-		
 		Triple<Policy, Environment, Object> triple = new Triple<Policy, Environment, Object>(policy, g, s);
 		if (cache.check_existance(triple))
 			return (Boolean) cache.retrieve(triple);
@@ -141,9 +141,8 @@ public class ModelChecker {
 				Object temp = tempPolicy.getVariable();
 				
 				// Check if the variable has been bound to a state.
-				//System.out.println(s+ "		" + g + "	" + temp + "	" + policy);
-				result = ((Environment.apply(g, temp).equals(s))? true : false);
-				//System.out.println(result);
+				result = (s.equals(Environment.apply(g, temp)) ? true : false);
+		
 				cache.put(triple, result);
 				return result;
 				
@@ -187,7 +186,6 @@ public class ModelChecker {
 				    tempPolicy.getDirection());
 				// Loop through all neighbours
 				for (Object neighbour : itr) {
-
 					// Test if the contained policy holds for the neighbour
 					if (checker(cache, frame, neighbour, g, tempPolicy.getPolicy())) {
 						result = true;
