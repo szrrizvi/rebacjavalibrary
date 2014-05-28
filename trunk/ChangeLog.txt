@@ -1,4 +1,14 @@
 Change Log
+***************************************************************
+
+v0.1.7
+
+- Resource added as a subcase of Variable variant
+
+- Changed to the check method in ModelChecker.java
+	- There are 3 different ways to invoke the Model Checker
+	- This is to allow for different naming conventions, but 
+	  they function the same way.
 
 ***************************************************************
 

@@ -1,5 +1,56 @@
 This project is under the MIT License. Please see LICENSE.txt for more information
 
+***************************************************************
+
+
+ReBAC Project version 0.1.7
+***************************************************************
+Updates:
+
+- Resource added as a subcase of Variable variant
+
+- Changed to the check method in ModelChecker.java
+	- There are 3 different ways to invoke the Model Checker
+	- This is to allow for different naming conventions, but 
+	  they function the same way.
+***************************************************************
+
+
+ReBAC Project version 0.1.5
+***************************************************************
+Updates:
+
+- Updated findFreeVars method in policyUtil. The method no longer uses the concrete
+  implementations, but rather the interfaces.
+
+***************************************************************
+
+
+ReBAC Project version 0.1.4
+***************************************************************
+
+Updates:
+
+- The Requestor variant now extends the Variable interface. This is done to maintain 
+  backwards compatibility, and still support Hybrid-Modal logic. 
+
+- Similar to the Requestor variant, Owner has also been added as a variant that extends
+  the Variable interface.
+  
+
+***************************************************************
+
+
+ReBAC Project version 0.1.3
+***************************************************************
+Updates:
+
+- Maven release of v0.1.2
+
+
+***************************************************************
+
+
 ReBAC Project version 0.1.2
 ***************************************************************
 Updates: 
