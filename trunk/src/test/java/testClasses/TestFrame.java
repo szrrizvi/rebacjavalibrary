@@ -31,7 +31,7 @@ import ca.ucalgary.ispia.rebac.Frame;
  * Basic implementation of the Frame interface.
  * Consists of sets of Node and Edge objects.
  */
-public class TestFrame implements Frame {
+public class TestFrame implements Frame<Node> {
 
 	private Map<String, Edge> edges;	// List of edges (relationships)
 	

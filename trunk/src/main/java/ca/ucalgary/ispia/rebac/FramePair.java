@@ -32,13 +32,12 @@ public class FramePair implements Frame{
 
 	Frame frameA, frameB;
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Iterable findNeighbours(Object vertex, Object relationIdentifier, Direction direction){
+	public Iterable<Object> findNeighbours(Object vertex, Object relationIdentifier, Direction direction){
 			
-		Iterable iteA = frameA.findNeighbours(vertex, relationIdentifier, direction);
-		Iterable iteB = frameB.findNeighbours(vertex, relationIdentifier, direction);
+		Iterable<Object> iteA = frameA.findNeighbours(vertex, relationIdentifier, direction);
+		Iterable<Object> iteB = frameB.findNeighbours(vertex, relationIdentifier, direction);
 		
-		return new IterablePair(iteA, iteB);
+		return new IterablePair<Object>(iteA, iteB);
 	}
 }
