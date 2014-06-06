@@ -1,6 +1,15 @@
 This project is under the MIT License. Please see LICENSE.txt for more information
 
 ***************************************************************
+ReBAC Project version 0.1.8
+***************************************************************
+Updates:
+- Removed @SuppressWarning annotations. And fixed programming style
+  to remove the warnings too.
+  
+- Frame is now a generic interface. It requires a type to specify
+  the return type for findNeighbours method.
+***************************************************************
 
 
 ReBAC Project version 0.1.7

@@ -126,8 +126,8 @@ public class ModelChecker {
 	 * @param policy: The policy to be checking
 	 * @return True if the access is allowed by the policy, else false.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static boolean checker(Cache cache, Frame frame, Object s, Environment g, Policy policy) {
+	private static boolean checker(Cache<Triple<Policy, Environment, Object>, Boolean> cache, 
+			Frame frame, Object s, Environment g, Policy policy) {
 		Triple<Policy, Environment, Object> triple = new Triple<Policy, Environment, Object>(policy, g, s);
 		if (cache.check_existance(triple))
 			return (Boolean) cache.retrieve(triple);
@@ -222,7 +222,7 @@ public class ModelChecker {
 				Bind tempPolicy = (Bind) policy;
 				Object tempA = tempPolicy.getVariable();
 								
-				Set free_vars = PolicyUtil.findFreeVars(tempPolicy, new HashSet<Object>());
+				Set<Object> free_vars = PolicyUtil.findFreeVars(tempPolicy, new HashSet<Object>());
 				g = Environment.project(g, free_vars);
 				
 				Environment h = Environment.insert(tempA, s, g);

@@ -1,5 +1,14 @@
 Change Log
 ***************************************************************
+v0.1.8
+
+- Removed @SuppressWarning annotations. And fixed programming style
+  to remove the warnings too.
+ 
+- Frame is now a Generic interface. It requires a type to specify
+  the return type for findNeighbours method.
+***************************************************************
+
 
 v0.1.7
 

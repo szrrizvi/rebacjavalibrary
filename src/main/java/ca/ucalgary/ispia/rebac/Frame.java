@@ -26,7 +26,7 @@ package ca.ucalgary.ispia.rebac;
  * interact with the protection state (i.e., the social networks and the
  * context hierarchy).
  */
-public interface Frame {
+public interface Frame <T> {
 	
 	/**
 	 * Finds all the specific type neighbours of the given vertex, in the effective
@@ -37,6 +37,5 @@ public interface Frame {
 	 * @return Specific type neighbours of the given vertex in the effective social
 	 * network.
 	 */
-	@SuppressWarnings("rawtypes")
-	public Iterable findNeighbours(Object vertex, Object relationIdentifier, Direction direction);
+	public Iterable<T> findNeighbours(Object vertex, Object relationIdentifier, Direction direction);
 }

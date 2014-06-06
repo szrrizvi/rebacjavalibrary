@@ -355,9 +355,8 @@ public class PolicyUtil {
 
 	
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 
-	public static Set findFreeVars(Policy policy, Set free_vars){
+	public static Set<Object> findFreeVars(Policy policy, Set<Object> free_vars){
 
 		
 
@@ -406,9 +405,9 @@ public class PolicyUtil {
 
 			
 
-			Set temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
+			Set<Object> temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
 
-			Set temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
+			Set<Object> temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
 
 			free_vars.addAll(temp_setA);
 
@@ -424,9 +423,9 @@ public class PolicyUtil {
 
 			
 
-			Set temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
+			Set<Object> temp_setA = findFreeVars(temp.getPolicyA(), new HashSet<Object>());
 
-			Set temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
+			Set<Object> temp_setB = findFreeVars(temp.getPolicyB(), new HashSet<Object>());
 
 			free_vars.addAll(temp_setA);
 
