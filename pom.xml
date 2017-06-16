@@ -18,9 +18,9 @@
     </license>
   </licenses>
   <scm>
-    <url>http://svn.code.sf.net/p/rebac/code/tags/rebac-0.1.7</url>
-    <connection>scm:svn:http://svn.code.sf.net/p/rebac/code/trunk</connection>
-    <developerConnection>scm:svn:https://svn.code.sf.net/p/rebac/code/trunk</developerConnection>
+    <url>https://github.com/szrrizvi/rebacjavalibrary</url>
+    <connection>scm:git@github.com:szrrizvi/rebacjavalibrary.git</connection>
+    <developerConnection>scm:git@github.com:szrrizvi/rebacjavalibrary.git</developerConnection>
   </scm>
   <developers>
     <developer>
